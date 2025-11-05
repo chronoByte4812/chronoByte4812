@@ -5,7 +5,7 @@
 /**
  * The main object of the scrips.
  */
-const defowler = {
+const chronoByte = {
     /**
      * A function for formatting logs.
      * @param {String} type - Message type, types include `INFO` `WARNING` `ERROR` `DEBUG`.
@@ -19,29 +19,14 @@ const defowler = {
             DEBUG: 'color: rgb(230, 207, 0); background-color: #4a4a4a',
         };
 
-        if (!validTypes[type]) {
-            console.trace(`%c[WARNING] - Invalid log type used: ${type}`, validTypes.WARNING);
-            return;
-        }; console.trace(`%c[${type}] - ${message}`, validTypes[type]);
+        console.trace(`%c[${type}] - ${message}`, validTypes[type] ?? validTypes[1]);
     },
     /**
      * Dynamically redirect the user upon a nav button click.
      * @param {String} pageName - The page button the user clicked.
      */
     handleNavButton: (pageName) => {
-        const allpageNames = ['home', 'projects'];
-
-        switch (pageName) {
-            case allpageNames[0]:
-                window.location.href = defowler.isGhPages ? '/defowler2005' : '/'; // Back to the root (index.html).
-                break;
-            case allpageNames[1]:
-                window.location.href = defowler.isGhPages ? '/defowler2005/projects' : '/projects.html'; // Headed to the projects page.
-                break;
-            default:
-                defowler.writeLog('WARNING', 'An invalid pageName was supplied at the handleNavButton() function.');
-                break;
-        }
+        window.location.href = pageName;
     },
     /**
      * A list of projects to be displayed.
@@ -65,8 +50,8 @@ const defowler = {
      * @returns {Array<Number>} - A version of an array which the numbers are sorted from 0 and up.
      */
     sortNumbers: (array) => {
-        if (!array) return defowler.writeLog('WARNING', 'You must provide a an array of numbers for the sortNumbers() function.');
-        if (Array.isArray(array) === false) return defowler.writeLog('WARNING', 'An invalid variable type was parsed in the sortNumbers() function.');
+        if (!array) return chronoByte.writeLog('WARNING', 'You must provide a an array of numbers for the sortNumbers() function.');
+        if (Array.isArray(array) === false) return chronoByte.writeLog('WARNING', 'An invalid variable type was parsed in the sortNumbers() function.');
         return array.sort((a, b) => a - b);
     },
     /**
@@ -77,18 +62,18 @@ const defowler = {
         const container = document.getElementById(element);
 
         if (!container) {
-            defowler.writeLog('ERROR', 'Could not find the container.');
+            chronoByte.writeLog('ERROR', 'Could not find the container.');
             return;
         }
 
         container.innerHTML = '';
 
-        if (defowler.projects.length === 0) {
+        if (chronoByte.projects.length === 0) {
             container.innerHTML = '<p>No projects available.</p>';
             return;
         }
 
-        defowler.projects.forEach((project) => {
+        chronoByte.projects.forEach((project) => {
             const projectDiv = document.createElement('div');
             projectDiv.classList.add('projectCard');
             projectDiv.innerHTML = `
@@ -99,7 +84,7 @@ const defowler = {
             container.appendChild(projectDiv);
         });
 
-        defowler.writeLog('INFO', 'Projects loaded successfully.');
+        chronoByte.writeLog('INFO', 'Projects loaded successfully.');
     }
 };
 
@@ -113,15 +98,15 @@ document.addEventListener('DOMContentLoaded', () => {
         script.onload = () => {
             if (typeof eruda !== 'undefined') {
                 eruda.init();
-                defowler.writeLog('INFO', 'Eruda successfully loaded. You now have a console on your phone!');
-            } else defowler.writeLog('WARN', 'Eruda could not be initialized; Eruda appears undefined.');
+                chronoByte.writeLog('INFO', 'Eruda successfully loaded. You now have a console on your phone!');
+            } else chronoByte.writeLog('WARN', 'Eruda could not be initialized; Eruda appears undefined.');
         };
         script.onerror = () => {
-            defowler.writeLog('ERROR', 'Failed to load Eruda script.');
+            chronoByte.writeLog('ERROR', 'Failed to load Eruda script.');
         }; document.body.appendChild(script);
-    } else defowler.writeLog('INFO', 'Eruda was not loaded as the user already has a console.');
+    } else chronoByte.writeLog('INFO', 'Eruda was not loaded as the user already has a console.');
     //Check for Apple products.
-    if (isAppleProduct) defowler.writeLog("WARNING", "Client is an apple user!");
-    if (window.location.pathname === '/projects.html' || window.location.pathname === '/defowler2005/projects') defowler.generateProjects('projectsPanel');
+    if (isAppleProduct) chronoByte.writeLog("WARNING", "Client is an apple user!");
+    if (window.location.pathname === '/projects.html' || window.location.pathname === '/chronoByte4812/projects') chronoByte.generateProjects('projectsPanel');
 });
 //})();

@@ -1,0 +1,29 @@
+{
+    "BlackListPaths": [
+        "/ServerConfig.json",
+        "/ServerLogs.log",
+        "/server.key"
+    ],
+    "MimeTypesCustom": {},
+    "Page403Custom": "",
+    "Page404Custom": "",
+    "certificates": [
+        "server.crt",
+        "server.key"
+    ],
+    "helpInfo": {
+        "BlackListPath": "An array that contains files and or paths that are forbidden to access",
+        "MimeTypesCustom": "An array that contains custom defined file mime types",
+        "Page403Custom": "A string path that tells the server to use a custom 403 page, avoid a forward slash at char[0]",
+        "Page404Custom": "A string path that tells the server to use a custom 403 page, avoid a forward slash at char[0]",
+        "certificates": "Tells the server where the crt and key are located",
+        "hidePublicIp": "Tells the server to hide the public IP addresses of clients for privacy reasons",
+        "ip": "A string that tells the server where to bind, use 0.0.0.0 to bind to all interfaces",
+        "port": "A number that tells the server what port to bind to, 80 is the standard for HTTP",
+        "useFileLogging": "A boolean to tell the server to write to a log file on the disk or not"
+    },
+    "hidePublicIp": true,
+    "ip": "0.0.0.0",
+    "port": 443,
+    "useFileLogging": true
+}
